@@ -1,0 +1,33 @@
+---
+
+docker_version: 20.10.16
+#docker_version: 17.03
+#
+#
+#username: "jlamadrid"
+docker_apt_release_channel: stable
+docker_apt_arch: amd64
+docker_compose_version: "2.5.0"
+
+#only to compare statement 'when' on install or upgrade docker-compose
+docker_compose_current_version: "0.0.1"
+
+
+docker_required_packages:
+  - "apt-transport-https"
+  - "ca-certificates"
+  - "curl"
+  - "gnupg-agent"
+  - "software-properties-common"
+  - "python3-pip"
+  - "python3-setuptools"
+
+docker_gpg_url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+docker_repo: 'deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}'
+  #docker_repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename|lower }} stable
+  #docker_repo: deb https://download.docker.com/linux/ubuntu focal stable
+docker_packages:
+  - "docker-ce"
+  - "docker-ce-cli"
+  - "containerd.io"
+docker_compose_url: https://github.com/docker/compose/releases/download/0.28.2/docker-compose-Linux-x86_64
